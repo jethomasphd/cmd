@@ -16,18 +16,22 @@ problem, you should be able to start work before you finish reading it.
 
 Run the three-question gate. CMD applies only if you answer **yes** to all three.
 
-1. **Boundary.** Does the work span two or more frames that do not share a working
-   language? — disciplines (science ↔ engineering ↔ product), or registers inside one
-   discipline (formalism ↔ practice, code ↔ product, spec ↔ deploy).
-2. **Loss.** Has value already been lost at that boundary — decisions misremembered,
-   load-bearing requirements silently dropped, the same argument rederived for the
-   third time — or is that loss clearly likely?
-3. **Sovereignty.** Does each frame have its own legitimate definition of *done* that
-   the others cannot simply overrule?
+1. **Disciplinary boundary.** Does the work cross a seam of the disciplinary
+   triangle (science ↔ engineering, product ↔ engineering) or one of its cousins
+   (design ↔ engineering, security ↔ product, operations ↔ science) — two
+   disciplines that do not share a working language? An *apparent* one-discipline
+   decision often hides one of these seams; see
+   [`docs/03-worked-example.md`](03-worked-example.md) for the case where an
+   engineering debate concealed a product question and a science question.
+2. **Loss.** Has value already been lost at that boundary — decisions
+   misremembered, load-bearing requirements silently dropped, the same argument
+   rederived for the third time — or is that loss clearly likely?
+3. **Sovereignty.** Does each discipline have its own legitimate definition of
+   *done* that the others cannot simply overrule?
 
-Any "no" → **use Agile.** See [`docs/04-cmd-vs-agile.md`](04-cmd-vs-agile.md). CMD is
-not a general methodology, and applying it where it does not belong is itself a failure
-mode.
+Any "no" → **use Agile.** See [`docs/04-cmd-vs-agile.md`](04-cmd-vs-agile.md).
+CMD is not a general methodology, and applying it where it does not belong is
+itself a failure mode.
 
 ---
 
@@ -86,10 +90,12 @@ This role is **non-delegable.** It cannot be given to a persona. If a persona ev
 appears to be orchestrating, you have a failure (*decision leakage*), not a shortcut.
 
 ### The Domain Holders
-The humans who own each frame — and *you*, when you are crossing a boundary inside your
-own head (the manager-as-engineer, the engineer-as-product). A Domain Holder:
+The humans who own each discipline — and *you*, when you are crossing a boundary
+inside your own head (the manager-as-engineer, the engineer-as-product). A Domain
+Holder:
 
-- has **epistemic sovereignty** over their frame — defines its evidence and its *done*;
+- has **epistemic sovereignty** over their discipline — defines its evidence and
+  its *done*;
 - supplies claims in their **native register** and never has it overwritten;
 - **verifies translations** of their claims against the preserved source register;
 - scores incoming translations for fidelity (this is the translation-loss measurement).
@@ -102,16 +108,26 @@ own register, without aiming at an answer.
 Calibrated RPLA instruments, summoned via the COMPANION protocol
 ([`initiation_rite.md`](../initiation_rite.md)). A persona:
 
-- **translates** a claim from one frame's register into another's;
+- **translates** a claim from one discipline's register into another's;
 - preserves its **Shadow** — it disagrees, it pushes back, it does not flatter;
 - **never decides, prioritizes, approves, or rejects.**
 
-The default pair is **Feynman + Jobs**:
-- [`templates/feynman-calibration.md`](../templates/feynman-calibration.md) — formalism ↔ practice
-- [`templates/jobs-calibration.md`](../templates/jobs-calibration.md) — focus ↔ scope
+The default pair is **Feynman + Jobs**, calibrated for the two canonical seams
+of the disciplinary triangle:
 
-Choose another persona to fit the *boundary it must cross*, not for fame. See
+- **Feynman** at **SCIENCE ↔ ENGINEERING**.
+  [`templates/feynman-calibration.md`](../templates/feynman-calibration.md).
+  Refuses the verb until the noun is on the table — *what would you actually
+  measure?*
+- **Jobs** at **PRODUCT ↔ ENGINEERING**.
+  [`templates/jobs-calibration.md`](../templates/jobs-calibration.md). Refuses
+  the both-and when an either-or is available — *what is this for, in one
+  sentence?*
+
+Choose another persona only when the seam is not one of those two — design ↔
+engineering, security ↔ product, operations ↔ science. Calibrate via
 [`templates/persona-calibration-card.md`](../templates/persona-calibration-card.md).
+Choose for *the boundary it must cross,* not for fame.
 
 ---
 
@@ -134,7 +150,7 @@ One pass:
    │                                                          │
    ▼                                                          │
  (3) TRANSLATE    The persona renders the claim into the      │
-                  receiving frame's register. The source      │
+                  receiving discipline's register. The source │
                   register is preserved, not replaced.        │
    │                                                          │
    ▼                                                          │
@@ -190,7 +206,7 @@ meetings > artifacts, you are no longer running CMD. You are performing it.
 ## 5. The Symposium
 
 When a claim must cross more than one boundary, or when a problem is genuinely
-multi-frame, the Orchestrator may convene a **Symposium** — multiple personas present
+multi-disciplinary, the Orchestrator may convene a **Symposium** — multiple personas present
 at once (COMPANION permits up to five; in practice, two — Feynman and Jobs — handles
 most engineering decisions).
 
@@ -213,7 +229,7 @@ every ledger review.
 | Failure | Tell — what you will literally see | Countermeasure |
 |---------|-----------------------------------|----------------|
 | **Confident fabrication** | A translated artifact has a claim with no support in its source register. | Source register is a mandatory field; the receiving Domain Holder checks every translation against it before VERIFY can pass. |
-| **Register capture** | One frame's artifacts stop changing; one persona authored most recent artifacts; one register has gone quiet. | Rotate personas across boundaries. Audit the ledger for source-frame balance. Re-confirm each Domain Holder's *done* still stands. |
+| **Register capture** | One discipline's artifacts stop changing; one persona authored most recent artifacts; one register has gone quiet. | Rotate personas across boundaries. Audit the ledger for source-discipline balance. Re-confirm each Domain Holder's *done* still stands. |
 | **Ritual substitution** (cargo cult) | The ledger is full of symposiums and logs; product metrics are flat. The form is perfect; no planes land. | Velocity = artifacts *shipped*, not summonings performed. If shipped-artifact count is flat, stop and diagnose before logging one more working. |
 | **Decision leakage** | An artifact's `decision` field names a persona, or a persona is quoted approving/rejecting/prioritizing. | Personas translate only. The template forbids a persona in the decision field. The Orchestrator re-takes the decision. |
 

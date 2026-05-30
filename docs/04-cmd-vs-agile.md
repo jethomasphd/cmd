@@ -36,12 +36,19 @@ honestly:
   with preserved contradiction, so it manufactures a consensus the disagreement did
   not have. The load-bearing detail — the contradiction itself — is exactly what is
   smoothed away.
+- **Disciplinary registers collide and lose.** Put a scientist, an engineer, and
+  a product lead in the same room and the room does not produce three
+  translations — it produces *one register the loudest discipline can speak in,*
+  and the other two leave with the impression they agreed when they did not. The
+  brainstorm has no mechanism for keeping science's evidence beside engineering's
+  constraint beside product's outcome. CMD does — the artifact's source register
+  field is exactly that mechanism.
 - **The decision rots by Friday.** Nothing carries it. By next month the team is
   having the meeting again, and nobody is sure what was decided the first time.
 
 The brainstorm is not a bad meeting because the people are bad. It is a bad
 *instrument*. Real-time, synchronous, volatile-output, consensus-seeking, low-quorum-
-threshold — every property is wrong for cross-frame decisions where preserved
+threshold — every property is wrong for cross-disciplinary decisions where preserved
 disagreement is the load-bearing thing.
 
 **CMD's answer is not a better meeting. It is a different instrument.** A `.md` matter,
@@ -57,7 +64,7 @@ The brainstorm was the wrong primitive. CMD names this directly and replaces it.
 
 | | **Agile** | **CMD** |
 |---|-----------|---------|
-| Names the bottleneck as… | Coordination — specialists are out of sync. | Translation — frames' languages do not commute. |
+| Names the bottleneck as… | Coordination — specialists are out of sync. | Translation — disciplines' languages do not commute. |
 | So the fix is… | Put specialists in a room; iterate fast; coordinate often. | Put a calibrated instrument *at the boundary*; translate with provenance. |
 | The medium of work is… | The increment of working software, surfaced in ceremonies. | The versioned, provenance-bearing `.md` artifact. |
 | Meetings are… | The heartbeat (stand-up, planning, review, retro, the brainstorm). | The exception, called only when no artifact can carry the load. |
@@ -92,17 +99,17 @@ CMD is a descendant, not a repudiation. It inherits:
 ## 4. What CMD rejects
 
 - **The room as the fix.** Adding people and meetings to a translation gap widens the
-  gap; it does not close it. A brainstorm is the wrong instrument for cross-frame
+  gap; it does not close it. A brainstorm is the wrong instrument for cross-disciplinary
   work.
 - **Ceremony as cadence.** Stand-ups, planning, and retros pace the work by the
   calendar. CMD paces the work by the artifact. The calendar is not a metric.
 - **Consensus as a default good.** Agile drives toward team alignment. CMD holds
-  that when frames genuinely disagree, a manufactured consensus usually deletes the
-  one detail that mattered. CMD preserves the contradiction instead.
-- **Distributed decision authority for cross-frame calls.** A self-organizing team
-  is excellent within a frame. Across frames it produces the three-different-accounts
-  failure. CMD names **one** human Orchestrator and makes the seat of judgment
-  explicit and non-delegable.
+  that when disciplines genuinely disagree, a manufactured consensus usually
+  deletes the one detail that mattered. CMD preserves the contradiction instead.
+- **Distributed decision authority for cross-disciplinary calls.** A
+  self-organizing team is excellent within a discipline. Across disciplines it
+  produces the three-different-accounts failure. CMD names **one** human
+  Orchestrator and makes the seat of judgment explicit and non-delegable.
 - **Time-boxing translation.** A translation that takes the time it takes. Forcing
   it into a sprint produces a translation that misses the load-bearing thing.
 
@@ -116,11 +123,13 @@ home.**
 
 Use Agile, not CMD, when:
 
-- **The work is single-frame.** Two engineers building a CRUD endpoint share a
-  language. There is no boundary to translate across. CMD would only add overhead.
-- **The frames already share a working language.** Some teams have, over years,
-  built a genuine shared vocabulary. They have already solved the translation problem
-  socially. CMD's instrument would be redundant.
+- **The work is single-discipline.** Two engineers building a CRUD endpoint
+  share a language. There is no disciplinary boundary to translate across. CMD
+  would only add overhead.
+- **The disciplines already share a working language.** Some teams have, over
+  years, built a genuine shared vocabulary across science / engineering /
+  product. They have already solved the translation problem socially. CMD's
+  instrument would be redundant.
 - **The work is well-understood and repeatable.** Shipping the next variant of a
   known feature does not stress a boundary. Sprint it.
 - **Speed of throughput dominates.** Agile's ceremony overhead is low and
@@ -138,7 +147,7 @@ turns the rest of the world's projects away at the door on purpose.
 ## 6. Can they coexist?
 
 Yes — and in most organizations they should. CMD operates at the **seams** between
-frames; Agile operates **within** a frame's delivery. A realistic shop runs Agile
+disciplines; Agile operates **within** a discipline's delivery. A realistic shop runs Agile
 inside engineering, inside the data-science team, inside product delivery — and runs
 CMD on the three or four boundaries where those teams must hand load-bearing claims
 to one another.
