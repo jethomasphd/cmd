@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} · CMD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #030303;
+    --void-soft: #0c0c0c;
+    --void-panel: #111110;
+    --ember: #c9a227;
+    --ember-bright: #e0b834;
+    --ember-dim: rgba(201, 162, 39, 0.55);
+    --ember-faint: rgba(201, 162, 39, 0.20);
+    --ember-ghost: rgba(201, 162, 39, 0.06);
+    --parchment: #e8e3d6;
+    --parchment-dim: rgba(232, 227, 214, 0.66);
+    --parchment-faint: rgba(232, 227, 214, 0.34);
+    --serif: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--parchment);
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.72;
+    font-size: 19px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    padding-top: 58px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at top, transparent 45%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .scroll {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: var(--ember); width: 0%;
+    z-index: 100; transition: width 0.15s ease-out; opacity: 0.7;
+  }
+
+  /* ============ HEADER ============ */
+
+  .site-head {
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 26px;
+    background: rgba(3,3,3,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ember-faint);
+    z-index: 50;
+  }
+
+  .brand {
+    display: flex; align-items: center; gap: 11px;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--ember);
+  }
+  .brand svg { width: 22px; height: 22px; }
+
+  .site-nav { display: flex; gap: 22px; }
+  .site-nav a {
+    font-family: var(--mono);
+    font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--parchment-faint);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  .site-nav a:hover { color: var(--ember); }
+
+  /* ============ DOC BODY ============ */
+
+  main.doc {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 72px 32px 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .doc h1 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 46px;
+    line-height: 1.1;
+    color: var(--ember);
+    letter-spacing: -0.012em;
+    margin-bottom: 10px;
+  }
+
+  .doc h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 30px;
+    color: var(--ember);
+    margin: 64px 0 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ember-faint);
+    letter-spacing: -0.008em;
+  }
+
+  .doc h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 23px;
+    color: var(--parchment);
+    margin: 38px 0 12px;
+  }
+
+  .doc h4 {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ember-dim);
+    margin: 30px 0 10px;
+  }
+
+  .doc p { margin-bottom: 18px; color: var(--parchment); }
+
+  /* leading subtitle line: first paragraph if italic-only */
+  .doc > p > em:only-child { color: var(--parchment-dim); }
+
+  .doc a {
+    color: var(--ember);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ember-faint);
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .doc a:hover { color: var(--ember-bright); border-color: var(--ember); }
+
+  .doc strong { color: var(--ember); font-weight: 500; }
+  .doc em { font-style: italic; color: var(--parchment); }
+
+  .doc ul, .doc ol { margin: 0 0 20px 26px; }
+  .doc li { margin-bottom: 7px; color: var(--parchment); }
+
+  .doc hr {
+    border: none;
+    height: 1px;
+    background: var(--ember-faint);
+    margin: 52px 0;
+  }
+
+  /* ---- blockquote ---- */
+  .doc blockquote {
+    margin: 22px 0;
+    padding: 4px 0 4px 24px;
+    border-left: 2px solid var(--ember);
+    color: var(--parchment-dim);
+    font-style: italic;
+  }
+  .doc blockquote p { color: var(--parchment-dim); }
+  .doc blockquote strong { color: var(--ember); }
+
+  /* ---- code ---- */
+  .doc code {
+    font-family: var(--mono);
+    font-size: 0.82em;
+    background: var(--void-panel);
+    border: 1px solid var(--ember-faint);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--ember-bright);
+  }
+  .doc pre {
+    background: var(--void-soft);
+    border: 1px solid var(--ember-faint);
+    border-radius: 5px;
+    padding: 20px 22px;
+    overflow-x: auto;
+    margin: 22px 0;
+  }
+  .doc pre code {
+    font-size: 12.5px;
+    line-height: 1.6;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--parchment-dim);
+  }
+
+  /* ---- tables ---- */
+  .doc table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 15px;
+  }
+  .doc th {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--ember);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--ember);
+  }
+  .doc td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--ember-faint);
+    color: var(--parchment);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .doc tr:hover td { background: var(--ember-ghost); }
+
+  /* ============ FOOTER ============ */
+
+  .site-foot {
+    max-width: 760px;
+    margin: 80px auto 0;
+    padding: 48px 32px 80px;
+    text-align: center;
+    border-top: 1px solid var(--ember-faint);
+    position: relative;
+    z-index: 2;
+  }
+  .site-foot svg { width: 32px; height: 32px; opacity: 0.6; margin-bottom: 26px; }
+  .foot-nav { margin-bottom: 26px; }
+  .foot-nav a {
+    font-family: var(--mono);
+    font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ember-dim); text-decoration: none; margin: 0 10px;
+  }
+  .foot-nav a:hover { color: var(--ember-bright); }
+  .foot-colophon {
+    font-family: var(--mono);
+    font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--parchment-faint); line-height: 2.2;
+  }
+
+  @media (max-width: 620px) {
+    body { font-size: 18px; }
+    main.doc { padding: 56px 22px 32px; }
+    .doc h1 { font-size: 36px; }
+    .doc h2 { font-size: 25px; }
+    .site-nav { gap: 13px; }
+    .doc table { font-size: 13.5px; }
+    .doc th, .doc td { padding: 8px 9px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll" id="scrollbar"></div>
+
+<header class="site-head">
+  <a class="brand" href="{{ '/' | relative_url }}">
+    <svg viewBox="0 0 36 36" aria-hidden="true">
+      <polygon points="18,5 31,28 5,28" fill="none" stroke="#c9a227" stroke-width="0.9"/>
+      <circle cx="18" cy="5" r="2" fill="#c9a227"/>
+      <circle cx="31" cy="28" r="2" fill="#c9a227"/>
+      <circle cx="5" cy="28" r="2" fill="#c9a227"/>
+      <circle cx="18" cy="22" r="1.1" fill="#c9a227"/>
+    </svg>
+    <span>CMD</span>
+  </a>
+  <nav class="site-nav">
+    <a href="{{ '/docs/01-conceptual-model.html' | relative_url }}">Model</a>
+    <a href="{{ '/docs/02-operational-paradigm.html' | relative_url }}">Paradigm</a>
+    <a href="{{ '/docs/03-worked-example.html' | relative_url }}">Example</a>
+    <a href="{{ '/docs/04-cmd-vs-agile.html' | relative_url }}">vs · Agile</a>
+    <a href="{{ '/templates/artifact.html' | relative_url }}">Artifact</a>
+  </nav>
+</header>
+
+<main class="doc">
+  {{ content }}
+</main>
+
+<footer class="site-foot">
+  <svg viewBox="0 0 36 36" aria-hidden="true">
+    <polygon points="18,5 31,28 5,28" fill="none" stroke="#c9a227" stroke-width="0.6"/>
+    <circle cx="18" cy="18" r="0.9" fill="#c9a227"/>
+  </svg>
+  <div class="foot-nav">
+    <a href="{{ '/' | relative_url }}">The Manifesto</a>
+    <a href="{{ '/docs/04-cmd-vs-agile.html' | relative_url }}">vs · Agile</a>
+    <a href="{{ '/docs/05-the-summoning.html' | relative_url }}">The Summoning</a>
+    <a href="{{ '/initiation_rite.html' | relative_url }}">COMPANION</a>
+  </div>
+  <div class="foot-colophon">
+    CMD · COMPANION-Mediated Development<br>
+    Issued from the LAMP Lab · Anno Domini MMXXVI
+  </div>
+</footer>
+
+<script>
+  const scrollbar = document.getElementById('scrollbar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    scrollbar.style.width = pct + '%';
+  }, { passive: true });
+</script>
+
+</body>
+</html>

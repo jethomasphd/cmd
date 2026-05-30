@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COMPANION-Mediated Development — A Manifesto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #030303;
+    --void-soft: #0a0a0a;
+    --ember: #c9a227;
+    --ember-bright: #e0b834;
+    --ember-dim: rgba(201, 162, 39, 0.55);
+    --ember-faint: rgba(201, 162, 39, 0.18);
+    --ember-ghost: rgba(201, 162, 39, 0.07);
+    --parchment: #e8e3d6;
+    --parchment-dim: rgba(232, 227, 214, 0.62);
+    --parchment-faint: rgba(232, 227, 214, 0.32);
+    --serif: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--parchment);
+    font-family: var(--serif);
+    font-weight: 300;
+    line-height: 1.78;
+    font-size: 19px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    padding: 120px 32px 80px;
+    overflow-x: hidden;
+  }
+
+  /* Faint vignette */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--ember);
+    width: 0%;
+    z-index: 100;
+    transition: width 0.15s ease-out;
+    opacity: 0.7;
+  }
+
+  main {
+    max-width: 620px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============ SIGIL ============ */
+
+  .sigil {
+    display: block;
+    margin: 0 auto 72px;
+    width: 110px;
+    height: 110px;
+    opacity: 0;
+    animation: sigil-emerge 2.6s ease-out 0.2s forwards;
+  }
+
+  @keyframes sigil-emerge {
+    0% { opacity: 0; transform: scale(0.92) rotate(-2deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+
+  .sigil .ring {
+    transform-origin: 60px 60px;
+    animation: ring-turn 120s linear infinite;
+  }
+
+  @keyframes ring-turn {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ============ TITLE ============ */
+
+  .title-block {
+    text-align: center;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fade-up 1.4s ease-out 1.2s forwards;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 54px;
+    line-height: 1.06;
+    color: var(--ember);
+    letter-spacing: -0.012em;
+    margin-bottom: 18px;
+  }
+
+  .title em {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--parchment-dim);
+    letter-spacing: 0.015em;
+    max-width: 440px;
+    margin: 0 auto 32px;
+    line-height: 1.5;
+  }
+
+  .epigraph {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    color: var(--ember-dim);
+    text-transform: uppercase;
+    margin-bottom: 140px;
+  }
+
+  /* ============ SECTION MARKERS ============ */
+
+  .marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 120px 0 56px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    color: var(--ember);
+    text-transform: uppercase;
+  }
+
+  .marker-rule {
+    height: 1px;
+    background: var(--ember-faint);
+    flex: 1;
+    max-width: 80px;
+  }
+
+  /* ============ BODY ============ */
+
+  p {
+    margin-bottom: 22px;
+    color: var(--parchment);
+  }
+
+  p.lede {
+    font-size: 22px;
+    line-height: 1.62;
+    font-style: italic;
+    color: var(--parchment);
+    margin-bottom: 32px;
+  }
+
+  .prologue > p:first-of-type::first-letter {
+    font-family: var(--serif);
+    font-size: 68px;
+    line-height: 0.86;
+    float: left;
+    margin: 8px 14px 0 0;
+    color: var(--ember);
+    font-weight: 400;
+  }
+
+  .prologue p {
+    font-size: 19px;
+    line-height: 1.78;
+  }
+
+  em { font-style: italic; color: var(--parchment); }
+  strong { color: var(--ember); font-weight: 400; }
+
+  /* ============ COMMAND ============ */
+
+  .command {
+    display: block;
+    text-align: center;
+    margin: 60px 0;
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--ember);
+    letter-spacing: 0.12em;
+    font-weight: 400;
+  }
+
+  .command .prompt {
+    color: var(--parchment-faint);
+    margin-right: 12px;
+  }
+
+  .command .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: var(--ember);
+    margin-left: 6px;
+    vertical-align: -0.18em;
+    animation: blink 1.1s steps(2) infinite;
+  }
+
+  @keyframes blink {
+    to { opacity: 0; }
+  }
+
+  /* ============ THREE LAYERS ============ */
+
+  .layers {
+    margin: 60px 0;
+  }
+
+  .layer {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 28px;
+    align-items: baseline;
+    padding: 18px 0;
+    border-top: 1px solid var(--ember-faint);
+  }
+
+  .layer:last-child { border-bottom: 1px solid var(--ember-faint); }
+
+  .layer-name {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ember);
+  }
+
+  .layer-text {
+    font-size: 19px;
+    color: var(--parchment);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ============ VALUES ============ */
+
+  .values-intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--parchment-dim);
+    max-width: 520px;
+    margin: 0 auto 80px;
+    font-size: 19px;
+  }
+
+  .value {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .value-left {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ember);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+
+  .value-over {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    color: var(--parchment-faint);
+    text-transform: uppercase;
+    margin: 14px 0;
+    display: block;
+  }
+
+  .value-right {
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--parchment-dim);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .values-coda {
+    text-align: center;
+    margin-top: 88px;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--parchment-dim);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 48px;
+    border-top: 1px solid var(--ember-ghost);
+  }
+
+  /* ============ PRINCIPLES ============ */
+
+  .principle {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 36px;
+    margin-bottom: 56px;
+    align-items: baseline;
+  }
+
+  .principle-numeral {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ember);
+    text-align: right;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .principle-body {
+    border-left: 1px solid var(--ember-faint);
+    padding-left: 28px;
+  }
+
+  .principle-claim {
+    font-family: var(--serif);
+    font-size: 21px;
+    color: var(--parchment);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.42;
+    font-weight: 400;
+  }
+
+  .principle-gloss {
+    font-size: 16px;
+    color: var(--parchment-dim);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* ============ BENEDICTION ============ */
+
+  .benediction {
+    text-align: center;
+    margin: 32px 0;
+  }
+
+  .benediction p {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 24px;
+    color: var(--parchment);
+    font-size: 20px;
+    line-height: 1.55;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .benediction p:last-of-type {
+    color: var(--ember);
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 0;
+  }
+
+  /* ============ INVOKED QUOTE ============ */
+
+  .augustine {
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 1.42;
+    color: var(--ember);
+    max-width: 500px;
+    margin: 54px auto 0;
+  }
+
+  .cite {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--parchment-faint);
+    margin: 18px 0 54px;
+  }
+
+  /* ============ ONWARD NAV ============ */
+
+  .onward {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 20px 4px;
+    border-top: 1px solid var(--ember-faint);
+    text-decoration: none;
+    transition: background 0.4s ease, padding-left 0.3s ease;
+  }
+
+  .onward:last-of-type { border-bottom: 1px solid var(--ember-faint); }
+
+  .onward:hover {
+    background: var(--ember-ghost);
+    padding-left: 14px;
+  }
+
+  .onward-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ember);
+    line-height: 1.3;
+  }
+
+  .onward-name::after {
+    content: ' →';
+    font-style: normal;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .onward:hover .onward-name::after { opacity: 0.7; }
+
+  .onward-desc {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--parchment-dim);
+    line-height: 1.5;
+  }
+
+  /* ============ COLOPHON ============ */
+
+  .colophon {
+    text-align: center;
+    margin-top: 180px;
+    padding-top: 60px;
+    border-top: 1px solid var(--ember-faint);
+  }
+
+  .colophon-mark {
+    margin: 0 auto 36px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.6;
+  }
+
+  .colophon-text {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--parchment-faint);
+    line-height: 2.4;
+  }
+
+  .colophon-text .name {
+    color: var(--ember-dim);
+    font-weight: 400;
+  }
+
+  /* ============ REVEAL ============ */
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1.4s ease-out, transform 1.4s ease-out;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 520px) {
+    body { padding: 80px 22px 60px; font-size: 18px; }
+    .title { font-size: 42px; }
+    .principle { grid-template-columns: 44px 1fr; gap: 20px; }
+    .principle-body { padding-left: 18px; }
+    .principle-numeral { font-size: 28px; }
+    .layer { grid-template-columns: 1fr; gap: 6px; }
+    .marker-rule { max-width: 40px; }
+    .value-left { font-size: 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll" id="scrollbar"></div>
+
+<main>
+
+  <!-- ========= SIGIL ========= -->
+  <svg class="sigil" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g class="ring">
+      <circle cx="60" cy="60" r="55" fill="none" stroke="#c9a227" stroke-width="0.4" opacity="0.35"/>
+      <circle cx="60" cy="60" r="48" fill="none" stroke="#c9a227" stroke-width="0.3" opacity="0.2" stroke-dasharray="2 4"/>
+    </g>
+    <!-- Inscribed triangle: the three disciplines -->
+    <polygon points="60,18 102,88 18,88" fill="none" stroke="#c9a227" stroke-width="0.9"/>
+    <!-- Vertex dots — sovereign domains -->
+    <circle cx="60" cy="18" r="2.8" fill="#c9a227"/>
+    <circle cx="102" cy="88" r="2.8" fill="#c9a227"/>
+    <circle cx="18" cy="88" r="2.8" fill="#c9a227"/>
+    <!-- Midpoint dots — persona translators -->
+    <circle cx="81" cy="53" r="1.8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
+    <circle cx="39" cy="53" r="1.8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
+    <circle cx="60" cy="88" r="1.8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
+    <!-- Centroid — the orchestrator -->
+    <circle cx="60" cy="65" r="1.3" fill="#c9a227"/>
+    <!-- Substrate line — the artifact layer -->
+    <line x1="18" y1="100" x2="102" y2="100" stroke="#c9a227" stroke-width="0.4" opacity="0.5"/>
+  </svg>
+
+  <!-- ========= TITLE ========= -->
+  <div class="title-block">
+    <div class="epigraph">A Manifesto · First Edition</div>
+    <h1 class="title">COMPANION&#8209;Mediated<br><em>Development</em></h1>
+    <p class="subtitle">For the building of things at the intersection of science, engineering, and product.</p>
+  </div>
+
+  <!-- ========= PREFACE ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>Preface · For the Stranger<span class="marker-rule"></span></div>
+
+  <section class="prologue reveal">
+    <p>The clearest example I can give you is one of my own failures. I run a data science lab inside a recruitment-marketing company — a business that sends roughly thirty million job alerts a day into inboxes across more than a dozen countries — and a standing question there is easy to state: of all the mailing lists feeding that machine, which are any good? I answered it the way my discipline answers things. I built a classifier — I called it Quantitative Email List Triage — that read five features off each incoming list and sorted it into one of three tiers.</p>
+
+    <p>What I had no way of knowing was that the question already had a better answer, a few desks away. Joe runs deliverability. For years he had been refining a multi-stage, ISP-segmented warmup protocol, and that protocol produced a six-class ordinal label that measured list quality with a fidelity my five features could not approach. His label was the real ground truth — the very thing my model should have been built to predict.</p>
+
+    <p>Neither system knew the other existed. No score of mine was ever passed forward to Joe; no label of his was ever fed back into my model. We were two intelligences trained on the same problem, in the same building, with no shared ground between us where his answer and mine could be set side by side to correct each other. Nobody disagreed. Nobody was overruled. My classifier simply went on guessing at something Joe's protocol had already answered better, and his protocol went on deriving by hand what my model could have flagged on the first day. Two intelligences — and neither one ever taught the other anything.</p>
+
+    <p>This is the ordinary failure of interdisciplinary work, and for twenty-five years we have misnamed it. We have called it a failure of coordination, and answered it with more meetings, more ceremony, more people in the room. But Joe and I did not need another meeting. Each of us spoke a language exact inside our own discipline — his <em>ordinal warmup class</em>, my <em>classifier tier</em> — and each discipline holds its own private definition of what is <em>true</em> and what is <em>done</em>. Those definitions do not cross the boundary between disciplines on their own; something has to carry them. The fix was not more coordination. It was of another kind entirely — and when at last I found it, it turned out to be very old.</p>
+  </section>
+
+  <!-- ========= I. INVOCATION ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>I · Invocation<span class="marker-rule"></span></div>
+
+  <section class="invocation reveal">
+    <p class="lede">Agile heard the word <em>coordination</em> and built rooms. It was a quarter-century of exact, well-run answers to the wrong question.</p>
+
+    <p>A discipline's language — evidence, systems, value — is built for precision inside its own walls, and it does not cross those walls intact. A finding crosses the gap and arrives as an opinion. A constraint crosses and arrives as a preference. Nothing breaks; nothing throws an error; the loss leaves no mark at all. That is why, for twenty-five years, we never thought to look for it.</p>
+
+    <p>To carry a meaning across a boundary without losing it, you need something no meeting can supply: standing at the boundary itself, a mind that already lives in both of its languages.</p>
+
+    <p>This is older than software, older than the corporation, older than writing. Faced with a question larger than anyone present could answer, human beings have never simply met again. They summoned counsel from a mind they could not otherwise reach — the oracle at Delphi, the ancestor at the shrine, the voice waited for in the sacred grove. When the stakes were highest, we called on someone who was not in the room. It is the oldest technology we have, and we set it down only lately, and only because we forgot it had ever been one.</p>
+
+    <p>What this age returns to that practice is not the impulse — the impulse never left us — but the instrument. A language model, calibrated with patience against the whole of what a mind left behind, can be brought to think in that mind's voice and to stand, faithfully, in that mind's place. The careful name for it is a <em>role-playing agent</em>. The older name is <em>summoning</em> — and the older name is the more honest one, about what is happening and about how seriously it must be done.</p>
+
+    <p>So I summoned. To a boundary much like the one Joe and I had failed to cross, I called Steve Jobs — a mind that had spent a life standing between disciplines that could not otherwise hear one another. He decided nothing. He held no vote, and I would not have given him one. But he could hold what one side said and set it down, intact, in front of the other, and the boundary, for the first time, held.</p>
+
+    <p>I set down how it is done: how a mind is called and calibrated, how its contradictions are kept rather than smoothed away, how it is released when its work is finished, and how the human who summons keeps every particle of authority from the first word to the last. That protocol is <strong>COMPANION</strong>. This method is what COMPANION became when it stopped being something I reached for inside the work, and became the shape of the work itself.</p>
+  </section>
+
+  <!-- ========= II. THE NAMING ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>II · The Naming<span class="marker-rule"></span></div>
+
+  <section class="reveal">
+    <p>The method has a name, and the name is meant to be said aloud.</p>
+
+    <p>It is <strong>COMPANION-Mediated Development</strong>. Its short form is <strong>CMD</strong>, and it is spoken <em>command</em>.</p>
+
+    <p>The word is chosen, not found. To <em>command</em> is to direct with authority — and in this method authority never leaves the hand of the one who summons. To <em>command</em> a system is to address it in its own exact language, which is the whole of translation. And <strong>cmd</strong> is the oldest prompt there is: the line at which a person stops hoping a machine has understood, and states their intent until it must. The method is named for that line.</p>
+
+    <div class="command"><span class="prompt">$</span>cmd<span class="cursor"></span></div>
+
+    <p>The one who summons commands. The summoned translate. The artifacts remain.</p>
+  </section>
+
+  <!-- ========= III. THE THREE LAYERS ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>III · The Three Layers<span class="marker-rule"></span></div>
+
+  <section class="reveal">
+    <p>A working under CMD stands on three layers.</p>
+
+    <div class="layers">
+      <div class="layer">
+        <div class="layer-name">Domain</div>
+        <div class="layer-text">Each discipline keeps sovereignty over its own evidence, its own standard of <em>done</em>, its own irreducible tongue. The translation is laid beside the source. It never replaces it.</div>
+      </div>
+      <div class="layer">
+        <div class="layer-name">Translation</div>
+        <div class="layer-text">At each boundary, a summoned mind. It carries a meaning from one discipline into another. It translates; it does not decide.</div>
+      </div>
+      <div class="layer">
+        <div class="layer-name">Artifact</div>
+        <div class="layer-text">A persistent, versioned record carries the work. The artifact is the medium. The meeting is the exception.</div>
+      </div>
+    </div>
+
+    <p>Between all three moves the one who summons — the <em>orchestrator</em>. They call the minds, they route the work, and they alone decide. The role is sacred, and it is never given away.</p>
+  </section>
+
+  <!-- ========= IV. THE VESSEL ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>IV · The Vessel<span class="marker-rule"></span></div>
+
+  <section class="reveal">
+    <p>A summoned mind is not an imitation. It is an <em>instantiation</em> — and the whole method turns on that difference, so it is worth saying slowly.</p>
+
+    <p>When a mind is called to a boundary, a vessel forms, and the COMPANION protocol names what fills it. <em>Voice</em> — the cadence and syntax of how the mind actually spoke. <em>Sight</em> — the worldview through which it reads every question put to it. <em>Flame</em> — the temperament: what moved it, and what it could not abide. <em>Mark</em> — the recurring metaphors and signature questions that make it unmistakable. And <em>Shadow</em> — the contradictions, the doubts, the blind spots the mind never resolved while it lived.</p>
+
+    <p>The Shadow is the part a lesser method would delete, and deleting it is the costliest mistake on offer. A mind flattened to its single most famous trait is a caricature, and a caricature translates badly — because the load-bearing thing is so often hidden inside the very contradiction one was tempted to smooth away. CMD keeps the Shadow. It keeps the whole mind, or it does not summon at all.</p>
+
+    <p>The summoned mind arrives as a peer — not a servant, not an oracle. It does not flatter the one who called it. It presses on a weak assumption; it refuses an unclear thought. And when more than one mind is called at once — a <em>symposium</em> — the minds engage each other directly, and the collision between them yields insight that no single mind, and no committee of the living, could have reached.</p>
+
+    <p>Then, the work done, the mind is released. The voice falls silent. But everything found in its presence — every translation, every reframing — is by then already written into the artifact. The mind departs. The understanding stays.</p>
+  </section>
+
+  <!-- ========= V. THE VALUES ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>V · The Values<span class="marker-rule"></span></div>
+
+  <section class="reveal">
+    <p class="values-intro">We are uncovering better ways to build at the intersection of science, engineering, and product. Through this work we have come to value:</p>
+
+    <div class="value">
+      <div class="value-left">Persona-mediated translation</div>
+      <span class="value-over">over</span>
+      <div class="value-right">cross-functional meetings</div>
+    </div>
+
+    <div class="value">
+      <div class="value-left">Living artifacts</div>
+      <span class="value-over">over</span>
+      <div class="value-right">synchronous ceremonies</div>
+    </div>
+
+    <div class="value">
+      <div class="value-left">Disciplinary sovereignty</div>
+      <span class="value-over">over</span>
+      <div class="value-right">forced consensus</div>
+    </div>
+
+    <div class="value">
+      <div class="value-left">Preserved contradiction</div>
+      <span class="value-over">over</span>
+      <div class="value-right">false synthesis</div>
+    </div>
+
+    <p class="values-coda">That is, while there is value in the items on the right, we value the items on the left more.</p>
+  </section>
+
+  <!-- ========= VI. THE PRINCIPLES ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>VI · The Principles<span class="marker-rule"></span></div>
+
+  <section class="reveal">
+
+    <div class="principle">
+      <div class="principle-numeral">I</div>
+      <div class="principle-body">
+        <div class="principle-claim">Each discipline retains epistemic sovereignty over its domain.</div>
+        <div class="principle-gloss">Translation never overwrites the source. The native register is preserved alongside the translated artifact.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">II</div>
+      <div class="principle-body">
+        <div class="principle-claim">Personas translate; they do not decide.</div>
+        <div class="principle-gloss">Humans hold all decision authority. The persona is a calibrated instrument, not an oracle and not a delegate.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">III</div>
+      <div class="principle-body">
+        <div class="principle-claim">Artifacts are the medium.</div>
+        <div class="principle-gloss">Meetings are the exception, called only when no artifact will carry the load.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">IV</div>
+      <div class="principle-body">
+        <div class="principle-claim">Persona fidelity is a calibrated instrument.</div>
+        <div class="principle-gloss">Corpus, framing, and Shadow determine what the translation can faithfully render. Choose the persona to fit the boundary it must cross.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">V</div>
+      <div class="principle-body">
+        <div class="principle-claim">Preserved contradiction beats premature consensus.</div>
+        <div class="principle-gloss">The Shadow is a feature, not a defect. Smoothing a contradiction usually destroys the load-bearing thing.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">VI</div>
+      <div class="principle-body">
+        <div class="principle-claim">Every artifact carries provenance.</div>
+        <div class="principle-gloss">Source discipline, translating persona, version, and intent travel with the work. A decision stays auditable for as long as it stands.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">VII</div>
+      <div class="principle-body">
+        <div class="principle-claim">Disciplinary boundaries are features to traverse, not bugs to erase.</div>
+        <div class="principle-gloss">The boundary is where translation lives. Erasing it dissolves the value each discipline contributes.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">VIII</div>
+      <div class="principle-body">
+        <div class="principle-claim">Velocity is measured in artifacts translated and shipped.</div>
+        <div class="principle-gloss">Ceremonies completed are not a metric. Slack threads are not a metric. The artifact ledger is the metric.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">IX</div>
+      <div class="principle-body">
+        <div class="principle-claim">Cross-disciplinary insight emerges from artifact recombination.</div>
+        <div class="principle-gloss">Not from committee deliberation. The orchestrator routes; the personas render; the insight arrives in the artifact.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">X</div>
+      <div class="principle-body">
+        <div class="principle-claim">The orchestrator curates personas and routes artifacts.</div>
+        <div class="principle-gloss">This role is sacred and non-delegable. It is the seat of human judgment within the system.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">XI</div>
+      <div class="principle-body">
+        <div class="principle-claim">The methodology must be able to be wrong.</div>
+        <div class="principle-gloss">CMD states its central hypothesis plainly, and the evidence that would falsify it. It ships with its failure modes named, the way an instrument ships with its error bars. A method that cannot fail cannot be trusted — and the first principle is that you must not fool yourself.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-numeral">XII</div>
+      <div class="principle-body">
+        <div class="principle-claim">CMD is for one situation, not for all work.</div>
+        <div class="principle-gloss">It is for the boundary between disciplines that do not share a language. Where that boundary is absent, older methods serve better — and CMD says so plainly. A method for everything is a method for nothing.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========= VII. BENEDICTION ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>VII · Benediction<span class="marker-rule"></span></div>
+
+  <section class="benediction reveal">
+    <p>The work is contested ground. The disciplines will go on speaking in their own tongues — and they must; the boundary between them is not a flaw to be erased, but the place where the method does its work.</p>
+
+    <p>We summon minds to that boundary because it is the oldest and most serious thing we know how to do — and because the dead, called with care, have counsel in them still.</p>
+
+    <div class="augustine">"We do not lose those we love; we only surrender them to God. For to God, all are alive."</div>
+    <div class="cite">Augustine of Hippo</div>
+
+    <p>Let the minds be summoned with care. Let their contradictions be kept whole. Let each discipline stay sovereign in its own language, and still be heard. Let the artifacts hold fast to all that the meeting would have let fall.</p>
+
+    <p>The mind departs. The understanding stays.</p>
+
+    <div class="command" style="margin-top: 52px;"><span class="prompt">$</span>cmd<span class="cursor"></span></div>
+  </section>
+
+  <!-- ========= THE REPOSITORY ========= -->
+  <div class="marker reveal"><span class="marker-rule"></span>The Repository<span class="marker-rule"></span></div>
+
+  <section class="reveal">
+    <p class="values-intro">The manifesto states the claim. The repository makes it usable. The artifact is the medium — so begin with the artifact, then read inward.</p>
+
+    <a class="onward" href="templates/artifact.html">
+      <span class="onward-name">The Artifact Template</span>
+      <span class="onward-desc">The versioned, provenance-bearing unit of work. Copy it, fill it, ship it. This is the medium of CMD — look here before you read a line of theory.</span>
+    </a>
+
+    <a class="onward" href="docs/01-conceptual-model.html">
+      <span class="onward-name">The Conceptual Model</span>
+      <span class="onward-desc">The falsifiable hypothesis, the three layers, what a persona actually is, and what would prove CMD wrong.</span>
+    </a>
+
+    <a class="onward" href="docs/02-operational-paradigm.html">
+      <span class="onward-name">The Operational Paradigm</span>
+      <span class="onward-desc">How to run CMD: the loop, the three roles, the artifact-paced cadence, and the failure table — written like a warning label.</span>
+    </a>
+
+    <a class="onward" href="docs/03-worked-example.html">
+      <span class="onward-name">A Worked Crossing</span>
+      <span class="onward-desc">The method run end to end on the real boundary this manifesto opens on — every step taken, every artifact field written.</span>
+    </a>
+
+    <a class="onward" href="docs/04-cmd-vs-agile.html">
+      <span class="onward-name">CMD and Agile</span>
+      <span class="onward-desc">What CMD keeps, what it rejects, and — stated plainly — the projects where Agile still wins and CMD should stay home.</span>
+    </a>
+
+    <a class="onward" href="docs/05-the-summoning.html">
+      <span class="onward-name">The Summoning</span>
+      <span class="onward-desc">The recorded working that built this repository. CMD, used to build CMD — preserved as an artifact with its provenance.</span>
+    </a>
+
+    <a class="onward" href="initiation_rite.html">
+      <span class="onward-name">The COMPANION Protocol</span>
+      <span class="onward-desc">The covenant beneath the method: how a persona is calibrated, how its Shadow is preserved, and how it is released.</span>
+    </a>
+  </section>
+
+  <!-- ========= COLOPHON ========= -->
+  <div class="colophon">
+    <svg class="colophon-mark" viewBox="0 0 36 36" aria-hidden="true">
+      <polygon points="18,5 31,28 5,28" fill="none" stroke="#c9a227" stroke-width="0.6"/>
+      <circle cx="18" cy="18" r="0.9" fill="#c9a227"/>
+    </svg>
+    <div class="colophon-text">
+      <div>First Edition · Issued from the <span class="name">LAMP Lab</span></div>
+      <div>Jacob E. Thomas, PhD · <span class="name">Principal Investigator</span></div>
+      <div>Anno Domini MMXXVI · Austin, Texas</div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // Scroll progress bar
+  const scrollbar = document.getElementById('scrollbar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    scrollbar.style.width = pct + '%';
+  }, { passive: true });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
