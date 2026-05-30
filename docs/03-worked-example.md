@@ -5,36 +5,42 @@ title: A Worked Crossing
 
 # A Worked Crossing
 
-*CMD, run end to end on a single real boundary — the one the [manifesto](../index.html) opens on. This document is [`templates/artifact.md`](../templates/artifact.md), filled.*
+*CMD, run end to end on a single engineering decision a manager will recognize on sight.
+Jobs and Feynman summoned in symposium. This document is
+[`templates/artifact.md`](../templates/artifact.md), filled.*
 
 ---
 
 ## The boundary
 
-The manifesto's opening failure is the cleanest case this method has, so it is the right
-one to work in full. Stated plainly, with nothing added:
+You manage an engineering team adjacent to payments. Twelve months ago the team built a
+**notifications service** inside the monolith — it handles transactional email, push,
+and in-app alerts. Six concrete notification types have grown up inside it, each with
+subtly different retry, dedup, and ordering semantics.
 
-- A data science lab built **Quantitative Email List Triage** — a classifier that reads
-  five features off each incoming mailing list and sorts it into one of three tiers.
-- Deliverability had, independently, a **six-class ordinal warmup label** — the outcome of
-  a multi-stage, ISP-segmented warmup protocol — that graded list quality with a fidelity
-  the five features could not approach.
-- The two never met. No score fed forward; no label fed back. Two intelligences, one
-  question — *which mailing lists are any good?* — and no shared ground between them.
+A senior engineer, **Mark**, has proposed extracting it as its own service. He believes
+the abstraction is leaking; he wants its own repo, its own deploy, its own on-call.
+A staff engineer, **Priya**, pushes back: the monolith hides the actual cost, extraction
+doubles the operational surface for a feeling of cleanliness. Three people have strong
+opinions. The team has rederived this argument three times in twelve months. A
+**90-minute architecture review** is on the calendar for Thursday.
 
-This document does not re-argue that. It **crosses** it: every step CMD takes, and every
-artifact field that step writes.
+The naive instinct: hold the meeting. The CMD response: **cancel the meeting**, write
+the matter, summon two minds, ship one artifact.
+
+This document is the artifact. The Thursday meeting did not happen.
 
 ## The artifact at a glance
 
 ```
 PROVENANCE
-  artifact id:          ART-001
-  title:                Mailing-list quality — the warmup label as a model target
-  source discipline:    Deliverability
-  receiving discipline: Data Science
-  translating persona:  Richard Feynman — calibrated for the formalism ↔ practice boundary
-  orchestrator:         the lab's PI (human)
+  artifact id:          ART-014
+  title:                Notifications service — extract, defer, or instrument first
+  source discipline:    Engineering management
+  receiving discipline: Engineering decision-of-record
+  translating personas: Richard P. Feynman — formalism ↔ practice
+                        Steven P. Jobs   — focus ↔ scope
+  orchestrator:         the engineering manager (human)
   version:              v1.0
   status:               shipped
 ```
@@ -43,135 +49,228 @@ PROVENANCE
 
 The three-question gate ([operational paradigm §0](02-operational-paradigm.md)):
 
-1. **Boundary.** Data Science and Deliverability — two disciplines, no shared working
-   language. *Yes.*
-2. **Loss.** Two systems graded the same thing and neither informed the other; value was
-   already being lost, daily. *Yes.*
-3. **Sovereignty.** Data Science owns what a model is; Deliverability owns what list
-   quality means in practice. Neither can simply overrule the other. *Yes.*
+1. **Boundary.** The architecture diagram says *notifications service is its own
+   bounded context.* The operational reality says *it is six subtly different code
+   paths sharing a database, a deploy, and an on-call rotation.* The formalism and
+   the practice are not the same thing. *Yes.*
+2. **Loss.** The argument has been rederived three times in twelve months without
+   resolution. Value already lost: weeks of senior-engineer attention. *Yes.*
+3. **Sovereignty.** Engineering owns what a service *is*; operations owns what is
+   actually paged at 3am; product owns what failure modes are acceptable. None can
+   simply overrule the others. *Yes.*
 
-Three yeses. CMD applies. Proceed.
+Three yeses. CMD applies. The Thursday meeting is cancelled.
 
 ## Step 1 — Capture: the source register
 
-The Domain Holder for deliverability — Joe — writes the claim **in his own register**.
-Not translated, not simplified, not yet aimed at the model. His words, his units. This is
-the moment a method most often skips, and skipping it is where the crossing fails.
+The manager opens his editor and writes the matter in his own register. Plain prose,
+his own vocabulary, no smoothing, no aiming-at-an-answer.
 
-> "A list isn't simply *good* or *bad* — it earns a grade by how it behaves through the
-> warmup. I run every new list through a staged warmup, segmented by ISP, because Gmail,
-> Outlook, and Yahoo punish and forgive differently. By the end I can place the list on a
-> six-step scale, worst to best: at the bottom, lists that scorch a sending IP's
-> reputation and have to be quarantined; at the top, lists that warm clean and hold
-> engagement for months. The four steps between are graded by how much hand-holding the
-> list needs and how fast its engagement decays. The exact boundaries are judgment — they
-> live in the runbook. That six-step grade is the truth about a list. Everything else is a
-> guess at it."
+> "We have a notifications service inside the monolith. It handles email, push, and
+> in-app — six concrete types with different retry, dedup, and ordering rules. Mark
+> wants to extract it; says the abstraction is rotting from inside. Priya pushes back;
+> says the monolith hides the actual cost — pulling it out means a new repo, a new
+> on-call, a new deploy pipeline, all to chase a feeling.
+>
+> I don't actually know who's right. What I do know is that we've had this argument
+> three times this year and each time it dissolves into 'let's revisit next quarter.'
+> I'm not interested in revisiting again. I want to know what we're actually arguing
+> about, and what would make either answer the right one. I have ninety minutes on
+> Thursday that the whole team has blocked. I would rather give that ninety minutes
+> back."
 
-That paragraph is the **source register**. Under Principle I it is now preserved
-permanently, beside every translation that follows, and never deleted. Note what Capture
-just accomplished on its own: judgment that lived only in Joe's head and his runbook is, for
-the first time, a written, versioned artifact the rest of the organization can hold.
+That paragraph is the **source register**. Under Principle I it is preserved
+permanently, beside every translation that follows, and never deleted. Note what
+Capture has already accomplished, before any persona is summoned: a question that lived
+only in the manager's head is, for the first time, a written, versioned artifact the
+team can hold.
 
-## Step 2 — Route: calibrating the mind
+The matter is saved as `matter.md`. The chamber is opened. The COMPANION foundation
+files and the Feynman + Jobs calibration cards are pasted in. The matter follows.
 
-The Orchestrator names the boundary precisely. It is not, at root, *science vs.
-operations*. It is the boundary between **a formalism and a practice** — between a model
-that manipulates symbols and a craft that has earned its knowledge by watching reality
-behave.
+## Step 2 — Route: choosing the boundary, choosing the minds
 
-So the Orchestrator summons a mind calibrated for exactly that seam: **Richard Feynman** —
-the register that refuses, on principle, to let a formalism drift loose from the physical
-thing it claims to measure, and that asks of every symbol, *what does this actually
-correspond to, out in the world?* (He is already a summoned mind in this repository; see
-[the summoning](05-the-summoning.md).) He will translate. He will not decide.
+The Orchestrator names the boundary precisely. It is **not**, at root, *extract vs.
+don't extract.* It is two boundaries in one decision:
 
-## Step 3 — Translate
+- **A formalism ↔ practice seam.** The architecture diagram and the operational
+  reality have drifted apart. Mark is naming the drift; Priya is naming the cost of
+  closing it. Neither side has produced a measurement.
+- **A focus ↔ scope seam.** The service is six things wearing one name. No one has
+  written down what the notifications service *is* — only what it currently *does*.
 
-Feynman renders the crossing in both directions — and, doing so, refuses the easy framing.
+So the Orchestrator summons two minds, calibrated for exactly those seams:
 
-> **Feynman.** Your model and Joe's runbook both say the word *quality* — so everyone
-> assumed they meant one thing. Watch them, though. Joe's grade is something a list *earns*
-> by behaving over weeks of warmup. Your five features are a snapshot taken at the door,
-> before the list has done anything at all. Those are not the same quantity. One is the
-> answer; the other is a guess at the answer made before the test is run. So stop saying
-> the model *reproduces* the label. It cannot, and it should not try. The model **predicts**
-> it.
+- **Richard Feynman** — for the formalism ↔ practice seam.
+- **Steven P. Jobs** — for the focus ↔ scope seam.
 
-That reframing is the translation's gift, and it has two hard consequences:
+The calibration cards are already in the chamber. He speaks the incantation.
 
-- **Deliverability → Data Science.** Joe's six-class label becomes the model's *target* —
-  defined precisely as *the warmup class the list will be assigned at completion of the
-  standard protocol*. Because the classes are **ordinal**, the model is an ordinal
-  predictor, and its loss must respect the order: predicting class 2 when the truth is
-  class 6 is a far worse error than predicting class 5. The old flat three-tier output was
-  not a smaller version of this. It was a different, blunter instrument.
-- **Data Science → Deliverability.** A predicted class is not yet an action. Translated
-  into Joe's protocol: a list predicted into the bottom classes routes to the most
-  conservative warmup track or to quarantine; a list predicted into the top classes
-  becomes eligible for an accelerated warmup; the middle takes the standard track. The
-  number becomes a decision the runbook can consume.
+## Step 3 — Translate (Feynman first)
 
-This is Principle IX in plain view: the insight — *the model's true job is ordinal
-prediction of the completion-class* — did not come from a committee. It arrived in the
-artifact, the moment the two registers were set side by side.
+> "Using this matter, summon Feynman."
 
-## Step 4 — Verify: the cost of the crossing
+> **Feynman.** You're using a word — *service* — and the word is doing too much work.
+> When Mark says the abstraction is rotting, what does he actually *mean*? Has anybody
+> measured the coupling? Counted the cross-cutting reads? Looked at the deploy
+> lockstep — how often does a change in one notification type force a redeploy that
+> touches the others? Or is *rotting* the feeling he gets when he's editing the code,
+> which is real but is not the same thing.
+>
+> And Priya — *operational cost.* What's the cost? Pages per quarter? Mean time to
+> recover? Hours of on-call attention attributable to this code? The number is
+> somewhere. If it isn't, that's the answer right there: nobody knows the operational
+> cost of the current arrangement, so nobody can know the cost of the new one either.
+> You're not arguing about a service. You're arguing about a feeling and a fear, both
+> of which are honest, and neither of which is the real thing.
+>
+> So before any architectural verb gets used — *extract, decompose, factor* — measure.
+> The coupling is somewhere on disk. Count it.
 
-The receiving Domain Holder restates the translation in its own words; the sending Holder
-scores it for fidelity. The lab restates: *"The target is the eventual warmup class,
-predicted from intake features, scored with an ordinal loss."*
+The first translation. Feynman has refused to let the Orchestrator skip to a decision.
+He has named the missing measurement and refused the verbs.
 
-Joe scores the restatement **0.85** (illustratively) — and names the missing 0.15: the
-restatement glossed that a list's warmup class can shift if its behavior changes mid-warmup;
-the label must be pinned to *protocol completion*, not to any earlier stage. The translation
-is revised to say so. **Translation loss: 0.15, logged on the artifact.** The crossing was
-not free, and the artifact now records exactly what it cost.
+## Step 4 — Translate (Jobs joins)
 
-## Step 5 — Decide: the Orchestrator, and only the Orchestrator
+> "Now summon Jobs to join this conversation."
 
-Feynman translated. He did not decide. The decision is the PI's:
+> **Jobs.** Stop. Before any of that — what is this service *for*? In one sentence.
+> Don't tell me what it does. Tell me what it *is*.
+>
+> If your sentence is *"it sends notifications,"* it isn't a service; it's a folder.
+> If your sentence is *"it is the single source of truth for whether a user got told
+> a thing,"* — that's a service. That's a thing with a job. Now your decision is
+> easy: does the current code *own* that sentence? If yes, leave it. If no, extract
+> — because the extraction isn't about coupling, it's about giving the sentence a
+> home.
+>
+> And Feynman is right that you should measure. But measurement without focus is
+> just numbers. The numbers will tell you the *cost* of either path. They will not
+> tell you the *point* of either path. Get the sentence first. Then the measurement
+> decides.
 
-- **Accept.** Adopt the six-class label as the training target for Quantitative Email List
-  Triage; rebuild the classifier as an ordinal predictor of the completion-class.
-- **Build the substrate.** Stand up the shared, versioned artifact that never existed:
-  every incoming list's predicted class is fed **forward** into Joe's routing; every
-  completed warmup writes its true class **back** as a training label.
-- **Load-bearing caveat — do not sand off.** The predicted class is an intake-time
-  *estimate*. No downstream consumer may treat it as the earned label. This caveat travels
-  with the artifact permanently.
+The second translation. Jobs has refused to let the Orchestrator skip to a
+measurement. He has named the missing definition.
 
-## Step 6 — The Shadow
+## Step 5 — The collision
 
-One contradiction will not resolve, and CMD forbids smoothing it (Principle V).
+> **Feynman.** A sentence isn't a measurement. You can write a beautiful sentence
+> about a service that has no business existing. Teams do this all the time. The
+> sentence is a luxury; the measurement is the floor.
+>
+> **Jobs.** A measurement isn't a decision. You can count coupling all day and still
+> not know whether the thing should be one service or ten. The number tells you the
+> cost. The sentence tells you whether the cost is worth paying. You're trying to
+> solve a focus problem with arithmetic, and arithmetic does not solve focus.
+>
+> **Feynman.** Then write the sentence and *then* count. But do not mistake the
+> sentence for the work.
+>
+> **Jobs.** Agreed. The sentence is the gate. The count is the budget. Either alone
+> is wrong. Sequence them, and the decision finishes itself.
 
-The classifier predicts at intake; the label is earned over the warmup. No model can fully
-close that gap, because intake features genuinely do not contain everything the warmup
-reveals — some lists only show their nature under load. A model later reported as
-*perfectly aligned with Joe's label* would be overfit, or lying. So the artifact carries,
-permanently, a **Shadow**:
+The collision has produced the artifact's load-bearing insight, which neither persona
+could have reached alone:
 
-> The prediction and the label measure different moments. They must never be conflated, and
-> the gap between them is not a bug to be driven to zero.
+> The question is not *extract or not.* The question is two sequential questions:
+> *is there a sentence?* and, only if yes, *what does the coupling cost?*
 
-Kept, not erased. The Shadow is what protects the method from its own success.
+Neither persona conceded ground. The Orchestrator did not force one. The sequencing
+that survives is the one both registers can sign off on.
+
+## Step 6 — Verify: the cost of the crossing
+
+The Orchestrator restates the symposium in his own words, and the personas score it
+for fidelity (the receiving-discipline check, [conceptual model §2](01-conceptual-model.md)).
+
+> "There's a gating question — can we name in one sentence what the notifications
+> service *is*, as a thing with a job. If we cannot, the answer is *don't extract;
+> we don't know what we'd be extracting*. If we can, the next question is operational:
+> count the cross-context coupling, the deploy lockstep, and the on-call hours that
+> are this code's fault. If the coupling is low and the on-call cost is low, the
+> extraction's value is small and we leave it. If the coupling is high *and* a clean
+> sentence exists, extract."
+
+**Feynman: 0.92.** Missing 0.08 — the measurement must include the team's actual
+**on-call burden today**, not just structural coupling, because a service with low
+coupling but high pager noise still benefits from being given its own boundary (or,
+more often, from *not* being given one, because new services start with new pager
+noise of their own).
+
+**Jobs: 0.95.** Missing 0.05 — the sentence must be one **a non-engineer can hear and
+agree with.** If it requires a system diagram to defend, it isn't the sentence yet;
+it's a caption.
+
+The restatement is revised to incorporate both. **Translation losses logged: 0.08
+(Feynman), 0.05 (Jobs).** Total loss on the crossing: lower than any prior round of
+this debate, by the only measure that matters — the artifact can be checked.
+
+## Step 7 — Decide: the Orchestrator, and only the Orchestrator
+
+The personas translated. They did not decide. The decision is the manager's:
+
+- **Decision.** **Defer the extraction question.** Replace it with two work items,
+  in order:
+  1. The two senior engineers (Mark and Priya, together) draft a **one-sentence
+     definition** of what the notifications service *is*. Not what it does — what
+     it is. Tested against a non-engineer (the product partner). **Deadline: one
+     week.**
+  2. Once the sentence exists — *or once they admit it does not* — an **operational
+     measurement:** cross-context coupling, deploy lockstep, on-call hours per
+     quarter attributable to this code. **Deadline: two weeks.**
+- **Decided by:** the engineering manager (human). No persona's name appears in
+  this field.
+- **Load-bearing caveat — do not sand off.** If the team cannot write the sentence,
+  *that is the answer.* The extraction does not happen, and *"we'll figure it out
+  later"* is not an acceptable variant of "no sentence." The **absence** of a
+  sentence is information.
+- **Rationale.** Twelve months of unresolved debate is itself an artifact: it says
+  the team has been arguing about the wrong question. Both personas, independently,
+  identified that the named question (*extract or not*) is downstream of unasked
+  questions. The decision is to ask those instead.
+
+The Thursday architecture review is cancelled. In its place: two named work items,
+two deadlines, and a 30-minute follow-up two weeks out — only if the artifact still
+cannot decide. The manager has spent **twenty-five minutes** on this, alone, at his
+desk.
+
+## Step 8 — The Shadow
+
+One contradiction will not resolve, and CMD forbids smoothing it (Principle V):
+
+> Feynman holds that the measurement is the *floor* — you cannot decide what you
+> cannot count. Jobs holds that the sentence is the *gate* — counting in the absence
+> of focus is theater. The manager has sequenced them here (sentence first, then
+> measurement), but in some future working the order will be wrong: the team will
+> need to count first to discover what kind of thing they are even trying to name.
+> The general rule does not exist. The two registers genuinely disagree about which
+> comes first, and the artifact records both.
+
+Kept, not erased. A future artifact on a different boundary may resolve the order the
+other way; the Shadow keeps that possibility honest, and keeps a future Orchestrator
+from quoting *this* artifact as universal.
 
 ## What the crossing produced
 
-**Before.** Two intelligences, the same question, no shared substrate — the classifier
-guessing at something the warmup had already answered better, the warmup re-deriving by
-hand what the model could have flagged on day one. Neither ever taught the other anything.
+**Before.** Three opinions, a 90-minute meeting on the calendar, twelve months of
+unresolved debate. Probable output: a fourth round of unresolved debate, scheduled
+for next quarter.
 
-**After.** One versioned artifact. Joe's label is the model's target. The model's score is
-an early signal inside Joe's protocol. The source register — the runbook knowledge, in
-Joe's own words — is captured and preserved beside every translation. Provenance is intact;
-the decision is auditable; the Shadow is on the record. The crossing is built, and the next
-list that arrives is read by both intelligences at once.
+**After.** One versioned `.md` artifact. Two named work items with deadlines. A
+preserved Shadow recording the contradiction the methodology declines to flatten.
+The source register — the manager's own words, before any translation — preserved
+beside every rendering. Provenance intact; decision auditable in week eight; the
+brainstorm avoided.
 
-That is one boundary, crossed. An organization is a graph of them. CMD is what you do at
-each edge.
+Six engineers got their Thursday afternoon back. The decision is *better* than the
+brainstorm would have produced, because the brainstorm would have manufactured a
+consensus the disagreement did not actually have. CMD preserved the disagreement
+and used it.
+
+The Thursday meeting was the wrong instrument. The artifact is what the meeting was
+trying to be.
 
 ---
 
-*Continue to [`docs/04-cmd-vs-agile.md`](04-cmd-vs-agile.md) — how this method differs from
-Agile, and where Agile still wins.*
+*Continue to [`docs/04-cmd-vs-agile.md`](04-cmd-vs-agile.md) — how this method
+differs from Agile, and where Agile still wins.*

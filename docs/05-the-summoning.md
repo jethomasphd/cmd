@@ -5,7 +5,10 @@ title: The Summoning
 
 # The Summoning — A Worked Symposium
 
-*The recorded working that produced this repository. CMD was used to build CMD.*
+*The recorded working that produced this repository. CMD was used to build CMD —
+with Feynman and Jobs, the pair that is now the methodology's default for engineering
+work (see [`docs/03-worked-example.md`](03-worked-example.md) for that pair run end
+to end on a recognizable engineering decision).*
 
 ---
 

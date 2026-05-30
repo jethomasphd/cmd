@@ -11,27 +11,32 @@ title: The Conceptual Model
 
 ## 1. The problem CMD exists to solve
 
-The [manifesto](../index.html) opens on a real failure, and it is worth restating in the
-plainest terms — because it is not an unlucky story, it is the *ordinary* one. A data
-science lab built a classifier to grade mailing-list quality. A deliverability team had,
-independently, a six-class warmup label that graded the same thing far better. The two
-never met: no prediction fed forward, no label fed back. Two intelligences, one question,
-no shared ground between them.
+The [manifesto](../index.html) opens on a real failure — a data science lab and a
+deliverability team grading the same thing better than the other, with no shared ground
+between them — and it is worth restating in the plainest terms, because it is not an
+unlucky story. It is the *ordinary* one. Nobody was careless. Nobody disagreed. Each side
+spoke a language exact inside its own frame, and neither language crossed the boundary
+on its own.
 
-Nobody was careless. Nobody disagreed. Each side spoke a language exact inside its own
-discipline, and neither language crossed the boundary on its own.
-[`docs/03-worked-example.md`](03-worked-example.md) crosses that exact boundary, step by
-step; this document gives the theory beneath it.
+The same failure has a smaller, more constant cousin **inside** a single discipline. An
+engineer's *architecture diagram* and an engineer's *operational reality* are two frames
+that do not share a working language: the diagram speaks of bounded contexts, the
+operational reality speaks of pages-per-quarter and deploy lockstep. A sentence true in
+one is not a sentence true in the other. Engineering managers know this exact failure
+mode by sight: the same architecture debate, rederived for the third time, never
+resolved. (See [`docs/03-worked-example.md`](03-worked-example.md) for that case worked
+in full.)
 
-The conventional diagnosis is a **coordination** failure — so the conventional fix is more
-coordination: more meetings, more ceremonies, a bigger room. Agile is the mature form of
-this fix, and within a single discipline it is good at what it does.
+The conventional diagnosis is a **coordination** failure — so the conventional fix is
+more coordination: more meetings, more ceremonies, a bigger room, a longer brainstorm.
+Agile is the mature form of this fix, and within a single frame it is good at what it
+does.
 
 CMD's diagnosis is different. **This is not a coordination failure. It is a translation
-failure.** Each discipline speaks a language built to be precise *within* its domain, and
-those languages **do not commute** — a faithful sentence in one is not a faithful sentence
-in another, and no amount of meeting converts one into the other without loss. Coordinating
-harder cannot fix a translation gap. You need a translation *layer*.
+failure.** Each frame speaks a language built to be precise *within* its domain, and
+those languages **do not commute** — a faithful sentence in one is not a faithful
+sentence in another, and no amount of meeting converts one into the other without loss.
+Coordinating harder cannot fix a translation gap. You need a translation *layer*.
 
 ## 2. The central hypothesis
 
@@ -132,21 +137,40 @@ render a particular, recognizable *mode of thought*. The COMPANION protocol
 Two true things about a persona are held in deliberate tension — and CMD does not resolve
 them, because resolving them would destroy one half:
 
-- **A persona is a calibrated register.** "Summon Feynman" is shorthand for *adopt a
-  plain-language, first-principles register with high tolerance for stated ignorance.* The
-  **calibration is the substance.** It is what makes the instrument honest and, in
-  principle, reproducible. The historical name, taken alone, is a *mnemonic* — a handle that
-  is easier to remember and aim than the full specification of the register.
+- **A persona is a calibrated register.** *Summon Feynman* is shorthand for *adopt a
+  plain-language, first-principles register with high tolerance for stated ignorance and
+  contempt for the verb-without-its-noun.* The **calibration is the substance.** It is
+  what makes the instrument honest and, in principle, reproducible. The historical name,
+  taken alone, is a *mnemonic* — a handle that is easier to remember and aim than the
+  full specification of the register.
 
-- **A persona is a human face.** People do not commit to a register; they commit to a face.
-  A teammate across the table can *picture* Feynman and ask "what would he actually push
-  back on here" — and the picture does cognitive work a spec sheet cannot. The name is not
-  decoration on the calibration. For the people using the instrument, the name is the
-  **delivery mechanism** of the calibration.
+- **A persona is a human face.** People do not commit to a register; they commit to a
+  face. An engineer at her desk can *picture* Feynman and ask *what would he actually
+  push back on here?* — and the picture does cognitive work a spec sheet cannot. The
+  name is not decoration on the calibration. For the person using the instrument, the
+  name is the **delivery mechanism** of the calibration.
 
-CMD calls the unresolved space between these two truths a **Shadow** — and treats it as a
-feature. (See §7.) The repository's own documentation preserves this disagreement in the
-open rather than smoothing it; that is the methodology obeying its own Principle V.
+CMD calls the unresolved space between these two truths a **Shadow** — and treats it as
+a feature. (See §7.) The repository's own documentation preserves this disagreement in
+the open rather than smoothing it; that is the methodology obeying its own Principle V.
+
+### The canonical pair
+
+Most engineering decisions die at one of two seams: a formalism untethered from the
+practice it claims to describe, or a scope drifting loose from any focus that can be
+named in a sentence. CMD's default symposium is **Feynman + Jobs**, calibrated for
+exactly these two seams.
+
+- **Feynman** at formalism ↔ practice — refuses the verb until the noun is on the
+  table. *What does this actually measure? What would falsify it?* See
+  [`templates/feynman-calibration.md`](../templates/feynman-calibration.md).
+- **Jobs** at focus ↔ scope — refuses the both-and when an either-or is available.
+  *What is this for, in one sentence? What gets cut?* See
+  [`templates/jobs-calibration.md`](../templates/jobs-calibration.md).
+
+Their collision is the load-bearing instrument. Watch it run in
+[`docs/03-worked-example.md`](03-worked-example.md). Calibrate other personas for
+other seams — but for the canonical engineering decision, this is the pair.
 
 ### The interface analogy
 
@@ -206,13 +230,18 @@ make a real decision about it.
 ## 8. Lineage and honest scope
 
 CMD does not claim to have discovered translation. It claims to have made translation an
-*explicit architectural layer* with calibrated instruments and a provenance discipline.
+*explicit architectural layer* with calibrated instruments and a provenance discipline —
+and a deployment model so light (one chamber, two protocol files, one matter, one
+emitted artifact) that a single person can run a complete crossing in twenty-five
+minutes without leaving their editor.
 
-It is for the intersection of science, engineering, and product. It is young. Its central
-hypothesis is stated above precisely so it can be tested and, if necessary, discarded. A
-CMD practitioner who finds the hypothesis failing in their context is not betraying the
-methodology by abandoning it — they are *practicing* it. Nature cannot be fooled, and a
-methodology that forbids its own falsification is not a methodology. It is a cargo cult.
+It is for cross-frame decisions — between disciplines (science ↔ engineering ↔ product)
+and within them (formalism ↔ practice, focus ↔ scope, spec ↔ deploy). It is young. Its
+central hypothesis is stated above precisely so it can be tested and, if necessary,
+discarded. A CMD practitioner who finds the hypothesis failing in their context is not
+betraying the methodology by abandoning it — they are *practicing* it. *Nature cannot
+be fooled*, and a methodology that forbids its own falsification is not a methodology.
+It is a cargo cult.
 
 ---
 

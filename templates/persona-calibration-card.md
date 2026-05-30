@@ -12,6 +12,14 @@ Calibration runs under the COMPANION protocol — [`enrichment_grimoire.json`](.
 and [`initiation_rite.md`](../initiation_rite.md). This card is the CMD-side record of *why
 this persona, for this boundary.*
 
+For the canonical CMD pair already filled in and ready to paste into a chamber, see:
+
+- [`feynman-calibration.md`](feynman-calibration.md) — Feynman, pre-aimed at **formalism ↔ practice**
+- [`jobs-calibration.md`](jobs-calibration.md) — Jobs, pre-aimed at **focus ↔ scope**
+
+Use those two as worked examples of the form below — and as a template for cards you
+write yourself when the seam you face is not formalism/practice or focus/scope.
+
 ---
 
 ```
