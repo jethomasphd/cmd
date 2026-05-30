@@ -263,11 +263,16 @@ one else's calendar consulted, and walk away with one durable, versioned `.md` f
 that carries the decision, its provenance, and the contradictions you declined to
 flatten.
 
-This is the deployment that makes CMD a **countertechnology** to the information
-flood. The flood happens because every channel is shared, ambient, and infinite —
-Slack, email, the meeting that begets the meeting. CMD's chamber is closed, the
-working is finite, and the output is one file. You leave the chamber with *less*
-than you brought in. What you leave with is durable.
+This is the deployment that makes CMD a **countertechnology** to the
+**Information Flood** — the ambient state of overwhelm that forms a worker
+toward ends that are not their own (defined in full in
+[`README.md`](../README.md) §X, with the lineage from Weil to Mumford to Ellul).
+In knowledge work, the Flood is the ambient channel that addresses the worker
+by name — Slack, email, the meeting that begets the meeting, the brainstorm
+whose recap smooths what the room actually disagreed about. CMD's chamber is
+closed where the Flood is ambient, the working is finite where the Flood is
+endless, the output is one file where the Flood is many. You leave the chamber
+with *less* than you brought in. What you leave with is durable.
 
 The team version is the same operation, run by each member in their own chamber,
 pooling the artifacts that need to travel. There is no team install. There is no

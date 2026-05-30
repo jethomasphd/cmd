@@ -8,8 +8,9 @@
 $ cmd
 ```
 
-A signature countertechnology to the information flood. Two `.md` files in, one
-`.md` file out. Zero installs, zero dependencies, any LLM context window.
+A signature countertechnology to the **Information Flood** (defined in §X).
+Two `.md` files in, one `.md` file out. Zero installs, zero dependencies, any
+LLM context window.
 
 ---
 
@@ -249,22 +250,51 @@ For the full comparison: [`docs/04-cmd-vs-agile.md`](docs/04-cmd-vs-agile.md).
 
 ---
 
-## X · The intellectual hub
+## X · The intellectual hub, against the Flood
 
 CMD is **single-Orchestrator by default.** One human, one artifact ledger, one
 chamber per working. A complete crossing — *the matter, the summoning, the
 symposium, the verified translation, the decision, the emitted artifact, the
 release* — runs in twenty-five minutes at one person's desk, with no one else's
-calendar consulted. The artifact ledger becomes a private practice that scales by
-*sharing finished artifacts,* not by sharing infrastructure. There is no team
-install. There is no shared CMD server. The methodology is portable because the
-medium is a file.
+calendar consulted.
 
-This is the deployment that makes CMD a **countertechnology** to the information
-flood. The flood happens because every channel is shared, ambient, and infinite —
-Slack, email, the meeting that begets the meeting. CMD's chamber is closed, the
-working is finite, the output is one file. You leave the chamber with *less* than
-you brought in. What you leave with is durable.
+This deployment is the shape of CMD as a **countertechnology** to a condition
+the methodology names directly:
+
+> ***The Information Flood*** — *the ambient state of overwhelm that forms a
+> worker toward ends that are not their own.* The Flood is not a screen-time
+> problem; it is a **formation** problem, and its diagnosis is older than
+> software. Simone Weil named the first form of it at the factory gate —
+> *uprootedness, by far the most dangerous malady to which human societies are
+> exposed* (Weil, 1952). Lewis Mumford named the recurring civilizational
+> pattern that produces it — *the megamachine,* from the Pyramid Age forward
+> (Mumford, 1967). Jacques Ellul named the autonomous logic of efficiency it
+> installs in every domain it touches — *la technique* (Ellul, 1964). What
+> they each named is the same structural fact: the issue is not any
+> particular technology, but a civilizational pattern that takes whatever
+> technology is available and turns it toward extraction.
+>
+> In knowledge work, the present form of that pattern is the ambient channel
+> that **addresses the worker by name** — the Slack thread that finds her,
+> the meeting that begets the meeting, the brainstorm whose recap smooths
+> what the room actually disagreed about, the decision that rots by Friday
+> and is rederived in Q3. The Flood does not destroy the slow practices of
+> thinking; it substitutes **frictionless surrogates** for them. It schedules
+> attention before belief has time to assemble.
+
+CMD operates by the opposite logic, and operates that way **on purpose.** The
+chamber is **closed** where the Flood is ambient. The working is **finite**
+where the Flood is endless. The artifact is **slow, written, dated, and
+signed** where the Flood is fast, algorithmic, and unattributable. The source
+register is **preserved** where the Flood smooths. The Shadow is **kept**
+where the Flood would have it counterfeit a consensus. You leave the chamber
+with *less* than you brought in. What you leave with is durable.
+
+The team version is the same operation, run by each member in their own
+chamber, pooling the artifacts that need to travel. There is no team install.
+There is no shared CMD server. The methodology is portable because the medium
+is a file; the practice is durable because the file outlasts the chamber that
+produced it.
 
 ---
 
