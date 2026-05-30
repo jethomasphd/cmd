@@ -60,9 +60,10 @@ without smoothing or anticipating.
 ## The decision in front of me
 <what you are actually trying to decide>
 
-## The frames in collision
-<which two registers do not commute here — e.g. "the abstraction I'm proposing"
-vs. "the operational reality the team actually maintains">
+## The disciplines in collision
+<which two registers do not commute here — e.g. "the engineering spec"
+vs. "the product sentence it serves," or "the architectural claim"
+vs. "the measurement that would settle it">
 
 ## What would make this a good crossing
 <what a useful artifact would carry; what would let you decide>
@@ -116,15 +117,21 @@ That is the deployment. It is also the methodology. Anything more is ceremony.
 
 ## The canonical pair, and when to call others
 
-| Persona | Boundary | When to call |
-|---|---|---|
-| **Feynman** | formalism ↔ practice | *What does this actually measure? What fails?* — when a decision rests on an abstraction that may not be grounded. |
-| **Jobs** | focus ↔ scope | *What is this for, in one sentence? What gets cut?* — when a thing is becoming a list of features wearing a name. |
-| *(others)* | calibrate per boundary | Use [`templates/persona-calibration-card.md`](templates/persona-calibration-card.md) when the seam isn't formalism/practice or focus/scope. |
+The default pair is calibrated for the two canonical seams of the disciplinary
+triangle — *science ↔ engineering* and *product ↔ engineering* — with engineering
+at the center where most technical decisions sit.
 
-The Feynman/Jobs pair covers most engineering decisions because most engineering
-decisions die at one of those two seams. Calibrate further only when the boundary you
-face genuinely is not one of those.
+| Persona | CMD seam | When to call | Specimen card |
+|---|---|---|---|
+| **Richard P. Feynman** (1918–1988) | **SCIENCE ↔ ENGINEERING** | *What does this actually measure? What would falsify it?* — when an engineering claim rests on an abstraction nobody has bothered to count. | [`feynman-calibration.md`](templates/feynman-calibration.md) |
+| **Steven P. Jobs** (1955–2011) | **PRODUCT ↔ ENGINEERING** | *What is this for, in one sentence a stranger can hear? What gets cut?* — when an engineering thing is becoming a list of features wearing a name. | [`jobs-calibration.md`](templates/jobs-calibration.md) |
+| *(other seams)* | design ↔ engineering, security ↔ product, operations ↔ science, … | Calibrate the persona to the seam, not to fame. | [`persona-calibration-card.md`](templates/persona-calibration-card.md) |
+
+The Feynman / Jobs pair covers most technical decisions because most technical
+decisions die at one of these two seams — *an engineering claim that should have
+been a measurement,* or *an engineering thing that should have been a product
+sentence.* Calibrate further only when the boundary you face genuinely is not one
+of those.
 
 ---
 

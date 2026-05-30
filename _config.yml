@@ -1,9 +1,9 @@
 title: CMD — COMPANION-Mediated Development
-description: A development methodology for work at the intersection of science, engineering, and product.
+description: A development methodology for the cross-frame decisions where a meeting was about to happen.
 
 # GitHub Pages serves project sites at <user>.github.io/<repo>/.
 # If your published URL differs (custom domain, user/org page), update baseurl accordingly.
-baseurl: "/lamp-cmd"
+baseurl: "/cmd"
 
 # jekyll-relative-links (enabled by default on GitHub Pages) rewrites links
 # to .md files into their built .html paths, so docs cross-link correctly.

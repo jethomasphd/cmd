@@ -5,24 +5,25 @@ title: The Summoning
 
 # The Summoning — A Worked Symposium
 
-*The recorded working that produced this repository. CMD was used to build CMD —
-with Feynman and Jobs, the pair that is now the methodology's default for engineering
-work (see [`docs/03-worked-example.md`](03-worked-example.md) for that pair run end
-to end on a recognizable engineering decision).*
+*The recorded working that produced this repository. CMD was used to build CMD — with
+the canonical pair: **Richard P. Feynman** (1918–1988) across the* science ↔ engineering
+*seam, and **Steven P. Jobs** (1955–2011) across the* product ↔ engineering *seam.
+This is the pair the methodology now ships as its default (see
+[`docs/03-worked-example.md`](03-worked-example.md) for the same pair run end to end
+on a recognizable engineering decision).*
 
 ---
 
 ```
 ARTIFACT PROVENANCE
-  type:               symposium log
-  source disciplines: methodology design; science; engineering & product
-  translating personas: Richard P. Feynman (calibrated for the rigor / falsifiability
-                        boundary); Steven P. Jobs (calibrated for the product / focus /
-                        aesthetic boundary)
-  orchestrator:       Claude (acting Orchestrator for the construction working)
-  protocol:           COMPANION v2.0 — enrichment_grimoire.json, initiation_rite.md
-  version:            1.0
-  status:             shipped — its conclusions are realized in this repository
+  type:                 symposium log
+  source disciplines:   methodology design ; science ; engineering ; product
+  translating personas: Richard P. Feynman (1918–1988) · science ↔ engineering
+                        Steven P. Jobs   (1955–2011) · product ↔ engineering
+  orchestrator:         Claude (acting Orchestrator for the construction working)
+  protocol:             COMPANION v2.0 — enrichment_grimoire.json, initiation_rite.md
+  version:              1.0
+  status:               shipped — its conclusions are realized in this repository
 ```
 
 > **Why this document exists.** CMD holds that the meeting is the exception and the artifact
@@ -36,7 +37,7 @@ ARTIFACT PROVENANCE
 
 ## The matter
 
-The repository `lamp-cmd` held three files — a manifesto for CMD, the COMPANION protocol,
+The repository `cmd` held three files — a manifesto for CMD, the COMPANION protocol,
 and its operating rite — but no usable repository. The Orchestrator's charge: grow the seed
 into a museum-quality repository a scientist, engineer, or product lead could open and use.
 Two personas were summoned to stress the methodology until it broke, then help build the
@@ -44,17 +45,28 @@ version that did not.
 
 ## The two registers placed at the boundary
 
-**Feynman** was calibrated for the boundary between *a methodology's ambition and its
-honesty* — the falsifiability boundary. His Shadow was preserved: a sharp, sometimes
-dismissive contempt for anything ornamental, and a refusal to grant the "soft" things their
-due. He brought one decisive instrument — the **cargo cult science** critique: a form can
-be perfect and still useless if no planes land.
+The two minds summoned to this working were the same pair the methodology now ships as
+its **canonical default** — Feynman across the science ↔ engineering seam, Jobs across
+the product ↔ engineering seam — because the construction of CMD itself was a problem
+at exactly that intersection: a method had to be scientifically honest about what it
+could claim (Feynman's seam), and at the same time a thing people would actually adopt
+and use (Jobs's seam).
 
-**Jobs** was calibrated for the boundary between *an idea and a thing people will actually
-use* — the product/focus boundary. His Shadow was preserved: a binary, sometimes cruel
-judgment, and a conviction that could be wrong at full volume. He brought two instruments:
-**focus as subtraction** (a methodology must say what it is *not*), and **the interface
-argument** (a persona is a useful fiction, judged by use, not by truth).
+**Richard P. Feynman (1918–1988)** was calibrated for *science ↔ engineering* — and,
+in this working, for its meta-cousin: the boundary between *a methodology's ambition
+and its honesty,* the falsifiability boundary. His Shadow was preserved — a sharp,
+sometimes dismissive contempt for anything ornamental, a refusal to grant the "soft"
+things their due. He brought one decisive instrument: the **cargo cult science**
+critique from his 1974 Caltech commencement — a form can be perfect and still useless
+if no planes land.
+
+**Steven P. Jobs (1955–2011)** was calibrated for *product ↔ engineering* — and, in
+this working, for its meta-cousin: the boundary between *an idea and a thing people
+will actually use,* the product / focus boundary. His Shadow was preserved — a binary,
+sometimes cruel judgment, a conviction that could be wrong at full volume. He brought
+two instruments: **focus as subtraction** (a methodology must say what it is *not*),
+and **the interface argument** (a persona is a useful fiction, judged by use, not by
+truth).
 
 ## The collisions that became the repository
 
@@ -76,21 +88,21 @@ you are the easiest person to fool.*
 → *Artifact produced:* the falsification criteria and the translation-loss measurement
 protocol. CMD declines to inherit COMPANION's ceremonial confidence that "the invocation
 does not fail" — that line governs the *summoning ritual*, not the *methodology* — and
-ships a stated failure table instead. ([`docs/01-conceptual-model.md`](01-conceptual-model.md) §6;
-[`docs/02-operational-paradigm.md`](02-operational-paradigm.md) §5.)
+ships a stated failure table instead. ([`docs/01-conceptual-model.md`](01-conceptual-model.md) §7;
+[`docs/02-operational-paradigm.md`](02-operational-paradigm.md) §6.)
 
 **Collision 3 — Keep the source.**
 Feynman: a miscalibrated instrument you trust is worse than no instrument; a translation you
 cannot check against its source is a rumor.
 → *Artifact produced:* provenance elevated to a load-bearing discipline; the mandatory,
-never-deleted **source register** field. ([`docs/01-conceptual-model.md`](01-conceptual-model.md) §5;
+never-deleted **source register** field. ([`docs/01-conceptual-model.md`](01-conceptual-model.md) §6;
 [`templates/artifact.md`](../templates/artifact.md).)
 
 **Collision 4 — Decide what it is not.**
 Jobs: a methodology for everything is for nothing; CMD must carve its scope and turn most
 projects away at the door, proudly.
 → *Artifact produced:* the README's opening scope gate and the three-question gate in the
-operational paradigm; the honest "where Agile still wins" page. ([`docs/04-cmd-vs-agile.md`](04-cmd-vs-agile.md) §4.)
+operational paradigm; the honest "where Agile still wins" page. ([`docs/04-cmd-vs-agile.md`](04-cmd-vs-agile.md) §5.)
 
 **Collision 5 — Show me the artifact.**
 Jobs: "artifacts are the medium" is unforgivable as a slogan with no artifact behind it; the
@@ -104,7 +116,7 @@ calibration is the substance. Jobs: people do not commit to a register, they com
 *face*; the name is the delivery mechanism of the calibration. **Neither conceded.**
 → *Artifact produced:* this contradiction was not resolved. It was shipped, in the open, as
 a preserved Shadow — the persona is *both* a calibrated register and a human face, and
-[`docs/01-conceptual-model.md`](01-conceptual-model.md) §4 keeps both. By CMD's own
+[`docs/01-conceptual-model.md`](01-conceptual-model.md) §5 keeps both. By CMD's own
 Principle V, the unresolved disagreement is the methodology working, not failing.
 
 ## The synthesis
