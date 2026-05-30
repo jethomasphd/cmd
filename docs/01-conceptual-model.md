@@ -11,12 +11,14 @@ title: The Conceptual Model
 
 ## 1. The problem CMD exists to solve
 
-The [manifesto](../index.html) opens on a real failure — a data science lab and a
-deliverability team grading the same thing better than the other, with no shared ground
-between them — and it is worth restating in the plainest terms, because it is not an
-unlucky story. It is the *ordinary* one. Nobody was careless. Nobody disagreed. Each side
-spoke a language exact inside its own frame, and neither language crossed the boundary
-on its own.
+The [manifesto](../index.html) opens on a case that is not an unlucky story but the
+*ordinary* one: two engineering teams of the first rank, working from the same interface
+document, lose a three-hundred-and-twenty-seven-million-dollar spacecraft because a
+quantity crosses a boundary as a number and not as its meaning — pound-seconds on one
+side, newton-seconds on the other, no error thrown, two hundred and eighty-six days of
+cruise to discover the gap. Nobody was careless. Nobody disagreed. Each side spoke a
+language exact inside its own frame, and neither language crossed the boundary on its
+own.
 
 The same failure has a smaller, more constant cousin **inside** a single discipline. An
 engineer's *architecture diagram* and an engineer's *operational reality* are two frames

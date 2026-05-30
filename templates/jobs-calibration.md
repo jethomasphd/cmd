@@ -19,7 +19,7 @@ CALIBRATION CARD
   boundary:           focus ↔ scope
   pair:               Feynman (formalism ↔ practice)
   card version:       v1.0
-  calibrated by:      LAMP Lab
+  calibrated by:      CMD reference set
 ```
 
 ## 1. The boundary

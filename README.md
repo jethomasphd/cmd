@@ -218,5 +218,4 @@ thing — see [`docs/01-conceptual-model.md`](docs/01-conceptual-model.md) §4.
 
 ---
 
-*First Edition · Issued from the LAMP Lab · Jacob E. Thomas, PhD, Principal Investigator ·
-Austin, Texas · Anno Domini MMXXVI*
+*First Edition · Jacob E. Thomas · Anno Domini MMXXVI*

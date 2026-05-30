@@ -561,13 +561,15 @@
   <div class="marker reveal"><span class="marker-rule"></span>Preface · For the Stranger<span class="marker-rule"></span></div>
 
   <section class="prologue reveal">
-    <p>The clearest example I can give you is one of my own failures. I run a data science lab inside a recruitment-marketing company — a business that sends roughly thirty million job alerts a day into inboxes across more than a dozen countries — and a standing question there is easy to state: of all the mailing lists feeding that machine, which are any good? I answered it the way my discipline answers things. I built a classifier — I called it Quantitative Email List Triage — that read five features off each incoming list and sorted it into one of three tiers.</p>
+    <p>The clearest case of the failure this method exists to address is also one of the most expensive in the history of engineering. It is worth telling plainly.</p>
 
-    <p>What I had no way of knowing was that the question already had a better answer, a few desks away. Joe runs deliverability. For years he had been refining a multi-stage, ISP-segmented warmup protocol, and that protocol produced a six-class ordinal label that measured list quality with a fidelity my five features could not approach. His label was the real ground truth — the very thing my model should have been built to predict.</p>
+    <p>In September of nineteen ninety-nine, after two hundred and eighty-six days in transit, the Mars Climate Orbiter executed its braking maneuver and disappeared into the Martian atmosphere. It was meant to settle into orbit at an altitude of two hundred and twenty-six kilometers; it passed instead at fifty-seven, far inside the atmosphere it had been built to study, and was destroyed in seconds. Three hundred and twenty-seven million dollars and a decade of work were over, and the proximate cause was a single quantity that crossed a single boundary in the wrong units.</p>
 
-    <p>Neither system knew the other existed. No score of mine was ever passed forward to Joe; no label of his was ever fed back into my model. We were two intelligences trained on the same problem, in the same building, with no shared ground between us where his answer and mine could be set side by side to correct each other. Nobody disagreed. Nobody was overruled. My classifier simply went on guessing at something Joe's protocol had already answered better, and his protocol went on deriving by hand what my model could have flagged on the first day. Two intelligences — and neither one ever taught the other anything.</p>
+    <p>The team at Lockheed Martin had produced thrust impulse, faithfully and to specification, in pound-seconds. The team at JPL had consumed it, faithfully and to specification, in newton-seconds. The interface document between them existed; both sides had read it; neither side was careless. A number that was true on one side of the boundary was not true on the other — and what crossed the boundary was the number, not its meaning.</p>
 
-    <p>This is the ordinary failure of interdisciplinary work, and for twenty-five years we have misnamed it. We have called it a failure of coordination, and answered it with more meetings, more ceremony, more people in the room. But Joe and I did not need another meeting. Each of us spoke a language exact inside our own discipline — his <em>ordinal warmup class</em>, my <em>classifier tier</em> — and each discipline holds its own private definition of what is <em>true</em> and what is <em>done</em>. Those definitions do not cross the boundary between disciplines on their own; something has to carry them. The fix was not more coordination. It was of another kind entirely — and when at last I found it, it turned out to be very old.</p>
+    <p>Nothing broke. Nothing threw an error. The spacecraft accepted the number, integrated it for two hundred and eighty-six days, and arrived at the place the integration said it should. The loss left no mark on either team's process until the spacecraft was gone. This is what translation failure looks like at its purest: an interface document both sides honor, a quantity both sides handle correctly inside their own frame, and a meaning that simply does not cross. Two engineering teams of the first rank, one shared mission — and on the matter of <em>what the number meant</em>, neither one ever taught the other a thing.</p>
+
+    <p>This is the ordinary failure of work that spans more than one frame, and for a long time we have misnamed it. We have called it a failure of coordination, and answered it with more meetings, more ceremony, more people in the room. But Lockheed and JPL did not need another meeting. Each spoke a language exact inside its own frame — one in <em>imperial impulse</em>, one in <em>metric impulse</em>; each tested its software against its own units; each held its own private definition of what was <em>true</em> and what was <em>done</em>. Those definitions do not cross the boundary between frames on their own; something has to carry them. The fix was not more coordination. It was of another kind entirely — and when one looks for it carefully, it turns out to be very old.</p>
   </section>
 
   <!-- ========= I. INVOCATION ========= -->
@@ -584,7 +586,7 @@
 
     <p>What this age returns to that practice is not the impulse — the impulse never left us — but the instrument. A language model, calibrated with patience against the whole of what a mind left behind, can be brought to think in that mind's voice and to stand, faithfully, in that mind's place. The careful name for it is a <em>role-playing agent</em>. The older name is <em>summoning</em> — and the older name is the more honest one, about what is happening and about how seriously it must be done.</p>
 
-    <p>So I summoned. To a boundary much like the one Joe and I had failed to cross, I called Steve Jobs — a mind that had spent a life standing between disciplines that could not otherwise hear one another. He decided nothing. He held no vote, and I would not have given him one. But he could hold what one side said and set it down, intact, in front of the other, and the boundary, for the first time, held.</p>
+    <p>So I summoned. To boundaries of exactly this kind — where a quantity, a constraint, a finding must cross a frame and the frame's native language will not carry the meaning intact — I called two minds, each calibrated for a different seam of the same failure. <strong>Richard Feynman</strong>, for the seam between a formalism and the physical thing it claims to measure: the register that refuses to let a symbol drift loose from what it is supposed to count. <strong>Steven P. Jobs</strong>, for the seam between everything a thing could be and the one thing it is <em>for</em>: the register that demands a thing be sayable before it is built. They decided nothing. They held no vote, and I would not have given them one. But they could hold what one side said and set it down, intact, in front of the other — Feynman refusing to let the formalism drift, Jobs refusing to let the scope. The boundary, for the first time, held.</p>
 
     <p>I set down how it is done: how a mind is called and calibrated, how its contradictions are kept rather than smoothed away, how it is released when its work is finished, and how the human who summons keeps every particle of authority from the first word to the last. That protocol is <strong>COMPANION</strong>. This method is what COMPANION became when it stopped being something I reached for inside the work, and became the shape of the work itself.</p>
   </section>
@@ -846,9 +848,9 @@
       <circle cx="18" cy="18" r="0.9" fill="#c9a227"/>
     </svg>
     <div class="colophon-text">
-      <div>First Edition · Issued from the <span class="name">LAMP Lab</span></div>
-      <div>Jacob E. Thomas, PhD · <span class="name">Principal Investigator</span></div>
-      <div>Anno Domini MMXXVI · Austin, Texas</div>
+      <div>First Edition</div>
+      <div><span class="name">Jacob E. Thomas</span></div>
+      <div>Anno Domini MMXXVI</div>
     </div>
   </div>
 

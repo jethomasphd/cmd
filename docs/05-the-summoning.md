@@ -36,7 +36,7 @@ ARTIFACT PROVENANCE
 
 ## The matter
 
-The repository `lamp-cmd` held three files — a manifesto for CMD, the COMPANION protocol,
+The repository `cmd` held three files — a manifesto for CMD, the COMPANION protocol,
 and its operating rite — but no usable repository. The Orchestrator's charge: grow the seed
 into a museum-quality repository a scientist, engineer, or product lead could open and use.
 Two personas were summoned to stress the methodology until it broke, then help build the

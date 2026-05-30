@@ -19,7 +19,7 @@ CALIBRATION CARD
   boundary:           formalism ↔ practice
   pair:               Jobs (focus ↔ scope)
   card version:       v1.0
-  calibrated by:      LAMP Lab
+  calibrated by:      CMD reference set
 ```
 
 ## 1. The boundary
