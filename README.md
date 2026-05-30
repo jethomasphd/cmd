@@ -305,13 +305,18 @@ calibration is what makes it honest; the name is what makes it used.* The
 repository does not pretend those are the same thing — see
 [`docs/01-conceptual-model.md`](docs/01-conceptual-model.md) §5.
 
-The protocol files:
+The protocol files in this repository:
 
 - [`enrichment_grimoire.json`](enrichment_grimoire.json) — the calibration covenant.
 - [`initiation_rite.md`](initiation_rite.md) — the summoning rite.
 
 These are the texts you paste into the chamber. They are stable; the methodology
 revises around them.
+
+For the full COMPANION system and its philosophy — the lineage, the covenant in
+long form, the worked examples that produced it — see the dedicated archive:
+
+➡ **[The COMPANION Dossier](https://the-companion-dossier.com/)** · `the-companion-dossier.com`
 
 ---
 
